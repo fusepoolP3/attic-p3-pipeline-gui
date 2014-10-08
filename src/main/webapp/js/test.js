@@ -1,11 +1,14 @@
 var pipelines = [];
 var selectedPipeline;
 var selectedText;
+var url;
 
 $(document).ready(function () {
     createProgressDialog();
     createAlertDialog();
 	
+    url = location.protocol + '//' + location.hostname + ':' + location.port + '/';
+        
     refreshList();
 });
 
@@ -44,10 +47,10 @@ $('#send-btn').click(function(){
     openDialog('progressDialog');
 
     $.ajax({
-        type: "POST",
+        type: 'POST',
         url: selectedPipeline,
-        contentType: "text/plain; charset=utf-8",
-        dataType: "text",
+        contentType: 'text/plain; charset=utf-8',
+        dataType: 'text',
         data: selectedText
     })
     .done(function(data) {
@@ -98,8 +101,8 @@ function refreshList(){
     openDialog('progressDialog');
 	
     $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/services/resources/get"
+        type: 'GET',
+        url: url + 'services/resources/get'
     })
     .done(function(json) {
         data = json;

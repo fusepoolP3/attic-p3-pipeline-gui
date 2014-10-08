@@ -2,11 +2,14 @@ var data;
 var selectedPipeline;
 var transformers;
 var edit;
+var url;
 
 $(document).ready(function () {
     createProgressDialog();
     createAlertDialog();
     createAddDialog();
+
+    url = location.protocol + '//' + location.hostname + ':' + location.port + '/';
 
     refreshContainers();
 });
@@ -15,8 +18,8 @@ function refreshContainers(uri){
     openDialog('progressDialog');
 	
     $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/services/resources/get"
+        type: 'GET',
+        url: url + 'services/resources/get'
     })
     .done(function(json) {
         data = json;
@@ -136,12 +139,12 @@ $('#save-btn').click(function(){
     
     if(edit){
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/services/resources/edit",
+            type: 'POST',
+            url: url + 'services/resources/edit',
             data: {
-                "name" : name, 
-                "uri"  : selectedPipeline.uri,
-                "selected": JSON.stringify(selected)
+                'name' : name, 
+                'uri'  : selectedPipeline.uri,
+                'selected': JSON.stringify(selected)
             }
         })
         .done(function(response) {
@@ -166,11 +169,11 @@ $('#save-btn').click(function(){
     }
     else{
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/services/resources/add",
+            type: 'POST',
+            url: url + 'services/resources/add',
             data: {
-                "name" : name, 
-                "selected": JSON.stringify(selected)
+                'name' : name, 
+                'selected': JSON.stringify(selected)
             }
         })
         .done(function(response) {
@@ -309,7 +312,7 @@ function checkIfValid(){
 
 function validatePipeline(uri){
     $.ajax({
-        type: "GET",
+        type: 'GET',
         url: uri
     })
     .done(function(data) {
@@ -336,10 +339,10 @@ function deleteConfirmed(){
     openDialog('progressDialog');
     
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/services/resources/delete",
+        type: 'POST',
+        url: url + 'services/resources/delete',
         data: {
-            "uri" : selectedPipeline.uri
+            'uri' : selectedPipeline.uri
         }
     })
     .done(function(response) {

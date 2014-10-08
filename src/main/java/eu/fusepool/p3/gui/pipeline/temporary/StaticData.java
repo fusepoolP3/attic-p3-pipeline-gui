@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.fusepool.p3.gui.pipeline.temporary;
 
 import eu.fusepool.p3.gui.pipeline.Pipeline;
