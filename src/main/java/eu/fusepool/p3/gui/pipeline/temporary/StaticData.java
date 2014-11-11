@@ -22,12 +22,12 @@ public class StaticData {
     public static void initialize() {
         pipelines = new ArrayList<>();
 
-        Pipeline temp = new Pipeline("Pipeline HU NASA", "http://localhost:7100/?t1=http%3A%2F%2Flocalhost%3A7101%2F%3Ffrom%3Dhu%26to%3Den&t2=http%3A%2F%2Flocalhost%3A7102%2F%3Ftaxonomy%3Dhttp%3A%2F%2F82.141.158.251%3A85%2Fmytaxonomies%2FNASA.subjects.skos.xml");
+        Pipeline temp = new Pipeline("Pipeline HU NASA", "http://localhost:7100/?t=http%3A%2F%2Flocalhost%3A7101%2F%3Ffrom%3Dhu%26to%3Den&t=http%3A%2F%2Flocalhost%3A7102%2F%3Ftaxonomy%3Dhttp%3A%2F%2F82.141.158.251%3A85%2Fmytaxonomies%2FNASA.subjects.skos.xml");
         temp.addTransformer(new Transformer("Bing Translate HU-EN", "http://localhost:7101/?from=hu&to=en"));
         temp.addTransformer(new Transformer("Dictionary Matcher NASA", "http://localhost:7102/?taxonomy=http://82.141.158.251:85/mytaxonomies/NASA.subjects.skos.xml"));
         pipelines.add(temp);
 
-        temp = new Pipeline("Pipeline DE NASA", "http://localhost:7100/?t1=http%3A%2F%2Flocalhost%3A7101%2F%3Ffrom%3Dde%26to%3Den&t2=http%3A%2F%2Flocalhost%3A7102%2F%3Ftaxonomy%3Dhttp%3A%2F%2F82.141.158.251%3A85%2Fmytaxonomies%2FNASA.subjects.skos.xml");
+        temp = new Pipeline("Pipeline DE NASA", "http://localhost:7100/?t=http%3A%2F%2Flocalhost%3A7101%2F%3Ffrom%3Dde%26to%3Den&t=http%3A%2F%2Flocalhost%3A7102%2F%3Ftaxonomy%3Dhttp%3A%2F%2F82.141.158.251%3A85%2Fmytaxonomies%2FNASA.subjects.skos.xml");
         temp.addTransformer(new Transformer("Bing Translate DE-EN", "http://localhost:7101/?from=de&to=en"));
         temp.addTransformer(new Transformer("Dictionary Matcher NASA", "http://localhost:7102/?taxonomy=http://82.141.158.251:85/mytaxonomies/NASA.subjects.skos.xml"));
         pipelines.add(temp);
@@ -95,7 +95,7 @@ public class StaticData {
                 if (i > 0) {
                     pipelineUri += "&";
                 }
-                pipelineUri += "t" + (i + 1) + "=" + URLEncoder.encode(transformer.getString("uri"));
+                pipelineUri += "t=" + URLEncoder.encode(transformer.getString("uri"));
                 pipelineTransformers.add(new Transformer(transformer.getString("name"), transformer.getString("uri")));
             }
 
@@ -126,7 +126,7 @@ public class StaticData {
                 if (i > 0) {
                     pipelineUri += "&";
                 }
-                pipelineUri += "t" + (i + 1) + "=" + URLEncoder.encode(transformer.getString("uri"));
+                pipelineUri += "t=" + URLEncoder.encode(transformer.getString("uri"));
                 pipelineTransformers.add(new Transformer(transformer.getString("name"), transformer.getString("uri")));
             }
 
@@ -147,7 +147,7 @@ public class StaticData {
                     break;
                 }
             }
-            
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
