@@ -1,4 +1,4 @@
-package eu.fusepool.p3.gui.pipeline.servlet;
+package eu.fusepool.p3.gui.pipeline.server;
 
 import org.wymiwyg.commons.util.arguments.ArgumentsWithHelp;
 import org.wymiwyg.commons.util.arguments.CommandLine;

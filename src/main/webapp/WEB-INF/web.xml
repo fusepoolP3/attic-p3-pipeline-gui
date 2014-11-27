@@ -15,7 +15,7 @@
         </servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>eu.fusepool.p3.gui.pipeline.servlet</param-value>
+            <param-value>eu.fusepool.p3.gui.pipeline.server</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -27,6 +27,6 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     <listener>
-        <listener-class>eu.fusepool.p3.gui.pipeline.servlet.AppContextListener</listener-class>
+        <listener-class>eu.fusepool.p3.gui.pipeline.server.AppContextListener</listener-class>
     </listener>
 </web-app>

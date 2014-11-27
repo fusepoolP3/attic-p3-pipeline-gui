@@ -135,6 +135,38 @@
             <artifactId>jetty-servlet</artifactId>
             <version>${jetty-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza</groupId>
+            <artifactId>rdf.core</artifactId>
+            <version>0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza</groupId>
+            <artifactId>rdf.utils</artifactId>
+            <version>0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza</groupId>
+            <artifactId>rdf.jena.serializer</artifactId>
+            <version>0.11</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.clerezza</groupId>
+            <artifactId>rdf.jena.parser</artifactId>
+            <version>0.12</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>eu.fusepool.p3</groupId>
+            <artifactId>vocab</artifactId>
+            <version>0.2</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -152,7 +184,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <main.class>eu.fusepool.p3.gui.pipeline.servlet.Main</main.class>
+        <main.class>eu.fusepool.p3.gui.pipeline.server.Main</main.class>
         <jersey-version>1.8</jersey-version>
         <jetty-version>9.2.0.RC0</jetty-version>
     </properties>

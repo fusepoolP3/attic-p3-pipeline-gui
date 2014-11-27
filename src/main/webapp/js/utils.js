@@ -20,6 +20,16 @@ function isEmpty(data){
     return false;
 }
 
+function replaceForText(str) {
+    str = str.replace(/\"/g, '\'');
+    return str.replace(/\'/g, '\"');
+}
+
+function replaceForHTML(str) {
+    return str.replace(/<.*?>/g, '');
+}
+
+
 function replaceAll(find, replace, str) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
