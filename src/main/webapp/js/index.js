@@ -119,7 +119,7 @@ function editPipeline() {
     });
     $('#sortable').html(initListContent);
 
-    createSorable();
+    createSortable();
 
     openDialog('addDialog');
 }
@@ -210,6 +210,12 @@ function removeMe(target) {
     });
 }
 
+function removeHelper(){
+    $('#draggables .ui-sortable-helper').remove();
+    $('#sortable .ui-sortable-placeholder').remove();
+    $('#sortable .list-group-item').show();
+}
+
 function initAddPipeline() {
     var initListContent = '';
     transformers = new Array();
@@ -238,18 +244,20 @@ function initAddPipeline() {
         $('#draggables').html('<li class="pin" style="height:35px;margin:15px;"><i>No avaliable transformer...</i></li>');
     }
 
-    createSorable();
+    createSortable();
 }
 
-function createSorable() {
+function createSortable() {
     $('#sortable').sortable({
         revert: true,
         update: function (event, ui) {
             console.log('update');
+            removeHelper();
             checkIfValid();
         },
         receive: function (event, ui) {
             console.log('receive');
+            removeHelper();
             $('#sortable > li table tr td a').css('visibility', 'visible');
             checkIfValid();
         }

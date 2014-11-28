@@ -20,7 +20,6 @@ public class Transformers {
 
     public static void initialize() {
         transformers = HTTPClient.getTransformers();
-
         //test
         // add pipeline
 //        Transformer a = new Transformer("Proba1", "asdasd", "http://localhost:7101/?proba");
@@ -151,7 +150,7 @@ public class Transformers {
                     pipelineUri += "&";
                 }
                 pipelineUri += "t=" + URLEncoder.encode(transformer.getString("uri"), "UTF-8");
-                pipelineTransformers.add(new Transformer(transformer.getString("name"), "", transformer.getString("uri")));
+                pipelineTransformers.add(new Transformer(transformer.getString("name"), transformer.getString("description"), transformer.getString("uri")));
             }
 
             if (!uri.equals(pipelineUri)) {
@@ -161,7 +160,6 @@ public class Transformers {
                 }
             }
 
-            // TODO handle edit
         } catch (JSONException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
