@@ -43,18 +43,12 @@ li {
 	width: 250px;
 	position: absolute;
 	top: 70px;
-	bottom: 95px;
+	bottom: 55px;
 	left: 15px;
 	background-color: #fafafa;
 	margin-bottom: 0px;
 }
 #add-btn {
-	width: 250px;
-	position: absolute;
-	bottom: 55px;
-	left: 15px;
-}
-#edit-btn {
 	width: 122px;
 	position: absolute;
 	bottom: 15px;

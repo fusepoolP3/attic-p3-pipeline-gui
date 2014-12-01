@@ -22,5 +22,4 @@ public class AppContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Context Destroyed!");
     }
-
 }

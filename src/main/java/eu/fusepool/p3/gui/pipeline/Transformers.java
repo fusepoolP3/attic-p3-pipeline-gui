@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -19,6 +20,10 @@ public class Transformers {
     public static String pipelineBaseURI = "http://localhost:7100/";
 
     public static void initialize() {
+        // todo use env var
+        Map<String, String> env = System.getenv();
+        env.get("P3_TR_LDPC");
+
         transformers = HTTPClient.getTransformers();
         //test
         // add pipeline

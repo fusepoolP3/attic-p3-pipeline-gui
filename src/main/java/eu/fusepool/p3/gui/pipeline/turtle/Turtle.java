@@ -47,10 +47,11 @@ public class Turtle {
         node.addPropertyValue(DCT.description, transformer.getDescription());
 
         if (transformer instanceof Pipeline) {
+            int index = 0;
             Pipeline pipeline = (Pipeline) transformer;
             for (Transformer childs : pipeline.getTransformers()) {
                 node.addProperty(LDP.contains, childs.getContainer().getUri());
-                node.addPropertyValue(childs.getContainer().getUri(), childs.getContainer().getIndex());
+                node.addPropertyValue(childs.getContainer().getUri(), ++index);
             }
         }
 

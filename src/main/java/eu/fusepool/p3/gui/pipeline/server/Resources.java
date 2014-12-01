@@ -42,19 +42,6 @@ public class Resources {
     }
 
     @POST
-    @Path("/edit")
-    @Consumes("application/x-www-form-urlencoded; charset=UTF-8")
-    @Produces("text/plain")
-    public String edit(@FormParam("name") String name, @FormParam("description") String description, @FormParam("uri") String uri, @FormParam("selected") String selected) {
-        try {
-            Transformers.editPipeline(name, description, uri, selected);
-            return "OK";
-        } catch (RuntimeException e) {
-            return e.getMessage();
-        }
-    }
-
-    @POST
     @Path("/delete")
     @Consumes("application/x-www-form-urlencoded; charset=UTF-8")
     @Produces("text/plain")
