@@ -80,9 +80,7 @@ function refreshContainers(uri) {
 //////////////////////////////
 
 function addPipeline() {
-    $('#pipeline-name').val('');
-    $('#sortable').empty();
-    $('#save-btn').attr("disabled", true);
+    clearDialog();
     edit = false;
     openDialog('addDialog');
 }
@@ -148,9 +146,7 @@ $('#save-btn').click(function () {
         }).done(function (response) {
             if (response === 'OK') {
                 closeDialog('addDialog');
-                $('#pipeline-name').val('');
-                $('#sortable').empty();
-                $('#save-btn').attr("disabled", true);
+                clearDialog();
                 refreshContainers();
             }
             else {
@@ -176,9 +172,7 @@ $('#save-btn').click(function () {
         }).done(function (response) {
             if (response === 'OK') {
                 closeDialog('addDialog');
-                $('#pipeline-name').val('');
-                $('#sortable').empty();
-                $('#save-btn').attr("disabled", true);
+                clearDialog();
                 refreshContainers();
             }
             else {
@@ -195,14 +189,19 @@ $('#save-btn').click(function () {
 });
 
 $('#clear-btn').click(function () {
-    $('#pipeline-name').val('');
-    $('#sortable').empty();
-    $('#save-btn').attr("disabled", true);
+    clearDialog();
 });
 
 $('#pipeline-name').keyup(function () {
     checkIfValid();
 });
+
+function clearDialog(){
+    $('#pipeline-name').val('');
+    $('#pipeline-description').val('');
+    $('#sortable').empty();
+    $('#save-btn').attr("disabled", true);
+}
 
 function removeMe(target) {
     $(target).closest('li').slideUp("normal", function () {
