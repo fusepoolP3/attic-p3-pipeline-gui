@@ -146,3 +146,9 @@ function createConfirmDialog(titleText, bodyText, confrimFunctionText) {
           }
       }).dialog("widget").removeClass('ui-widget');
 }
+
+function createTitle(uri, description){
+    var title = 'URI: ' + uri + '\n\n';
+    title += 'Description: ' + description;
+    return title;
+}

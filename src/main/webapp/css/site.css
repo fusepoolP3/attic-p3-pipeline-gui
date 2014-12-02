@@ -2,11 +2,7 @@
 /* -----	MAIN CSS	----- */
 /* -------------------------- */
 body {
-	background-color: #eee;
-}
-textarea {
-    resize: none;
-	width: 100%;
+    background-color: #eee;
 }
 li {
     cursor: pointer;

@@ -39,7 +39,7 @@
             <li><a href="about.html">About</a></li>
           </ul>
 		  <div style="float: right;">
-			<img src="images/fusepool.png" alt="Fusepool P3" height="45px;">
+			<img src="images/fusepool.png" alt="Fusepool P3" height="45">
 		  </div>
         </div><!--/.nav-collapse -->
       </div>
@@ -81,14 +81,15 @@
 	</div>
 	
 	<div id="addDialog" title="Add pipeline">
-		<form class="form-inline">
-		    
+		<form class="form-inline">   
 			<div id="head-panel" class="panel panel-default">	
 			 <table><tr><td style="padding-right: 5px;">
 					<input id="pipeline-name" type="text" class="form-control" style="width: 300px;" placeholder="Pipeline name...">
-				</td><td>
+				</td><td style="padding-right: 5px;">
+                                    <textarea id="pipeline-description" class="form-control" style="width: 300px; height: 34px;" placeholder="Pipeline description..." rows="1"></textarea>
+                                </td><td>
 					<div style="width: 200px;">
-					<button id="save-btn" class="btn btn-primary" type="button" disabled="true"><span class="glyphicon glyphicon-floppy-disk"></span><span class="glyphicon-button">Save</span></button>
+					<button id="save-btn" class="btn btn-primary" type="button" disabled="disabled"><span class="glyphicon glyphicon-floppy-disk"></span><span class="glyphicon-button">Save</span></button>
 					<button id="clear-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span><span class="glyphicon-button">Clear</span></button>
 				  </div>
 				</td></tr></table>	

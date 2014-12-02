@@ -128,6 +128,7 @@ $('#save-btn').click(function () {
     openDialog('progressDialog');
 
     var name = $('#pipeline-name').val();
+    var description = $('#pipeline-description').val();
     var selected = new Array();
     $('#sortable').find('.index').each(function () {
         var index = $(this).text();
@@ -140,7 +141,7 @@ $('#save-btn').click(function () {
             url: url + 'services/resources/edit',
             data: {
                 'name': name,
-                'description': '',
+                'description': description,
                 'uri': selectedPipeline.uri,
                 'selected': JSON.stringify(selected)
             }
@@ -169,7 +170,7 @@ $('#save-btn').click(function () {
             url: url + 'services/resources/add',
             data: {
                 'name': name,
-                'description': '',
+                'description': description,
                 'selected': JSON.stringify(selected)
             }
         }).done(function (response) {
@@ -227,7 +228,7 @@ function initAddPipeline() {
             uri = uri.substring(0, 74) + '...';
         }
 
-        initListContent += '<li class="list-group-item">' +
+        initListContent += '<li title="' + transformer.description + '" class="list-group-item">' +
                 '<table style="width:100%;"><tr><td style="width: 95%;">' +
                 '<p class="index" style="display:none;">' + i + '</p>' +
                 '<b class="list-group-item-heading">' + transformer.name + '</b>' +

@@ -22,7 +22,11 @@ public class Transformers {
     public static void initialize() {
         // todo use env var
         Map<String, String> env = System.getenv();
+        for (String envName : env.keySet()) {
+            System.out.format("%s=%s%n", envName, env.get(envName));
+        }
         env.get("P3_TR_LDPC");
+        env.get("P3_PL_URI");
 
         transformers = HTTPClient.getTransformers();
         //test
@@ -127,6 +131,10 @@ public class Transformers {
             temp = getTransformerByURI(pipelineUri);
             if (temp != null) {
                 throw new RuntimeException("This pipeline already exists under the name \"" + temp.getTitle() + "\"!");
+            }
+
+            if (description == null) {
+                description = "";
             }
 
             pipeline = new Pipeline(name, description, pipelineUri);
