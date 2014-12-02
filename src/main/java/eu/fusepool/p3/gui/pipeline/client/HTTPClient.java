@@ -20,7 +20,11 @@ import java.util.List;
  */
 public class HTTPClient {
 
-    private static final String transformerRegistry = "http://sandbox.fusepool.info:8181/ldp/tr-ldpc";
+    private static String transformerRegistry;
+
+    public static void initialize(String uri) {
+        transformerRegistry = uri;
+    }
 
     public static List<Transformer> getTransformers() {
         List<Container> containers = getContainers();

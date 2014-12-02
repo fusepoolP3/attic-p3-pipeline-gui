@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -17,45 +16,14 @@ import org.codehaus.jettison.json.JSONObject;
 public class Transformers {
 
     public static List<Transformer> transformers;
-    public static String pipelineBaseURI = "http://localhost:7100/";
+    private static String pipelineBaseURI;
 
-    public static void initialize() {
-        // todo use env var
-        Map<String, String> env = System.getenv();
-        for (String envName : env.keySet()) {
-            System.out.format("%s=%s%n", envName, env.get(envName));
-        }
-        env.get("P3_TR_LDPC");
-        env.get("P3_PL_URI");
+    public static void initialize(String uri) {
+        pipelineBaseURI = uri;
+    }
 
+    public static void getInitData() {
         transformers = HTTPClient.getTransformers();
-        //test
-        // add pipeline
-//        Transformer a = new Transformer("Proba1", "asdasd", "http://localhost:7101/?proba");
-//        Transformer b = new Transformer("Proba2", "asdasd", "http://localhost:7101/?proba");
-//        Transformer c = new Transformer("Proba3", "asdasd", "http://localhost:7101/?proba");
-//        Transformer d = new Transformer("Proba4", "asdasd", "http://localhost:7101/?proba");
-//        a.setContainer(1, new UriRef("http://sandbox.fusepool.info:8181/ldp/tr-ldpc/b"));
-//        b.setContainer(2, new UriRef("http://sandbox.fusepool.info:8181/ldp/tr-ldpc/s6"));
-//        c.setContainer(3, new UriRef("http://sandbox.fusepool.info:8181/ldp/tr-ldpc/u"));
-//        d.setContainer(4, new UriRef("http://sandbox.fusepool.info:8181/ldp/tr-ldpc/s"));
-//        Pipeline p = new Pipeline("Pipeline", "asdasd", "http://localhost:7101/?pipe");
-//        p.addTransformer(a);
-//        p.addTransformer(b);
-//        p.addTransformer(c);
-//        p.addTransformer(d);
-//        HTTPClient.postTransformer(p);
-        // delete transformer
-//        Transformer a = new Transformer("Proba", "asdasd", "http://localhost:7101/?proba");
-//        a.container = new UriRef("http://sandbox.fusepool.info:8181/ldp/tr-ldpc/M");
-//        HTTPClient.deleteTransformer(a);
-        // add transformer
-//        HTTPClient.postTransformer(new Transformer("Proba", "asdasd", "http://localhost:7101/?proba"));
-        // get transformers
-//        List<Transformer> t = HTTPClient.getTransformers();
-//        for (Transformer t1 : t) {
-//            System.out.println(t1.toString());
-//        }
     }
 
     public static String getTransformers() {

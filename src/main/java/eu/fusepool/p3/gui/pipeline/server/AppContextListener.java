@@ -15,7 +15,7 @@ public class AppContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Context Initialized!");
-        Transformers.initialize();
+        Transformers.getInitData();
     }
 
     @Override
