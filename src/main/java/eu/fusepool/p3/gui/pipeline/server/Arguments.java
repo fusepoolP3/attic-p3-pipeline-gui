@@ -18,7 +18,7 @@ public interface Arguments extends ArgumentsWithHelp {
             description = "The URI of the transformer-registry container")
     public String getTransformerRegistry();
 
-    @CommandLine(longName = "pipeline-base", shortName = {"PB"}, required = false,
+    @CommandLine(longName = "pipeline-base", shortName = {"PL"}, required = false,
             description = "The base URI of the pipeline transformer")
     public String getPipelineBase();
 }
