@@ -10,8 +10,9 @@
     <build>
         <resources>
             <resource>
+                <targetPath>src/main/webapp</targetPath>
                 <directory>src/main/webapp</directory>
-           </resource>
+            </resource>
         </resources>
         <pluginManagement>
             <plugins>
@@ -77,6 +78,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>com.owlike</groupId>
+            <artifactId>genson</artifactId>
+            <version>0.93</version>
+        </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>

@@ -21,7 +21,7 @@ function refreshContainers(uri) {
         type: 'GET',
         url: url + 'services/resources/get'
     }).done(function (json) {
-        data = json;
+        data = $.parseJSON(json);
 
         var pipelineListContent = '';
         var transformerListContent = '';
