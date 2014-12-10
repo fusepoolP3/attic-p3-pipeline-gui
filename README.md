@@ -19,7 +19,9 @@ Compile the source code and start the application with
     mvn clean install exec:java -Dexec.args="-TR <transformer_regstry_uri> -PL <pipeline_transformer_base_uri> -P <port>"
 
 `-TR` URI of the Transformer Registry (required if not set as environmental variable)
+
 `-PL` base URI of the Pipeline Transformer (required if not set as environmental variable)
+
 `-P` sets the port (optional)
 
 ###Usage
