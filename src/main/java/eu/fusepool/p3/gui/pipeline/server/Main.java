@@ -45,12 +45,7 @@ public class Main {
 
         Server server = new Server(arguments.getPort());
 
-//        String webDir = Main.class.getClassLoader().getResource("src/main/webapp").toExternalForm();
-//
-//        ServletContextHandler webAppContext = new ServletContextHandler();
-//        webAppContext.setContextPath("/");
-//        webAppContext.setResourceBase(webDir);
-        WebAppContext webAppContext = new WebAppContext();//new WebAppContext("./src/main/webapp", "/");
+        WebAppContext webAppContext = new WebAppContext();
         webAppContext.setLogUrlOnStart(true);
         webAppContext.setWelcomeFiles(new String[]{"index.html"});
         webAppContext.setContextPath("/");
@@ -58,7 +53,11 @@ public class Main {
         webAppContext.configure();
         server.setHandler(webAppContext);
 
-        server.start();
-        server.join();
+        try {
+            server.start();
+            server.join();
+        } finally {
+            server.destroy();
+        }
     }
 }

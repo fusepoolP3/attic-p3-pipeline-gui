@@ -21,7 +21,7 @@ function refreshContainers(uri) {
         type: 'GET',
         url: url + 'services/resources/get'
     }).done(function (json) {
-        data = $.parseJSON(json);
+        data = json;
 
         var pipelineListContent = '';
         var transformerListContent = '';
@@ -137,6 +137,7 @@ $('#save-btn').click(function () {
         $.ajax({
             type: 'POST',
             url: url + 'services/resources/edit',
+            //contentType:"application/x-www-form-urlencoded",
             data: {
                 'name': name,
                 'description': description,
@@ -164,6 +165,7 @@ $('#save-btn').click(function () {
         $.ajax({
             type: 'POST',
             url: url + 'services/resources/add',
+            //contentType:"application/x-www-form-urlencoded",
             data: {
                 'name': name,
                 'description': description,
@@ -342,6 +344,7 @@ function deleteConfirmed() {
     $.ajax({
         type: 'POST',
         url: url + 'services/resources/delete',
+//        contentType:"application/json",
         data: {
             'uri': selectedPipeline.uri
         }

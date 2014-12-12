@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @Path("resources")
 public class Resources {
@@ -23,15 +24,15 @@ public class Resources {
 
     @GET
     @Path("/get")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public String get() {
         return Transformers.getTransformers();
     }
 
     @POST
     @Path("/add")
-    @Consumes("application/x-www-form-urlencoded; charset=UTF-8")
-    @Produces("text/plain")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
     public String add(@FormParam("name") String name, @FormParam("description") String description, @FormParam("selected") String selected) {
         try {
             Transformers.addPipeline(name, description, selected);
@@ -43,8 +44,8 @@ public class Resources {
 
     @POST
     @Path("/delete")
-    @Consumes("application/x-www-form-urlencoded; charset=UTF-8")
-    @Produces("text/plain")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
     public String delete(@FormParam("uri") String uri) {
         try {
             Transformers.deletePipeline(uri);
