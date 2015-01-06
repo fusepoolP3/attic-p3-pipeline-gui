@@ -8,18 +8,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("resources")
 public class Resources {
 
     public Resources() {
-    }
-
-    @GET
-    @Path("/test")
-    @Produces("text/plain")
-    public String test() {
-        return "Hello world!";
     }
 
     @GET
@@ -32,26 +26,26 @@ public class Resources {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String add(@FormParam("name") String name, @FormParam("description") String description, @FormParam("selected") String selected) {
+    @Produces(MediaType.TEXT_HTML)
+    public Response add(@FormParam("name") String name, @FormParam("description") String description, @FormParam("selected") String selected) {
         try {
             Transformers.addPipeline(name, description, selected);
-            return "OK";
+            return Response.ok().build();
         } catch (RuntimeException e) {
-            return e.getMessage();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 
     @POST
     @Path("/delete")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String delete(@FormParam("uri") String uri) {
+    @Produces(MediaType.TEXT_HTML)
+    public Response delete(@FormParam("uri") String uri) {
         try {
             Transformers.deletePipeline(uri);
-            return "OK";
+            return Response.ok().build();
         } catch (RuntimeException e) {
-            return e.getMessage();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 }

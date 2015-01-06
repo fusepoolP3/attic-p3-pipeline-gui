@@ -137,7 +137,6 @@ $('#save-btn').click(function () {
         $.ajax({
             type: 'POST',
             url: url + 'services/resources/edit',
-            //contentType:"application/x-www-form-urlencoded",
             data: {
                 'name': name,
                 'description': description,
@@ -165,26 +164,18 @@ $('#save-btn').click(function () {
         $.ajax({
             type: 'POST',
             url: url + 'services/resources/add',
-            //contentType:"application/x-www-form-urlencoded",
             data: {
                 'name': name,
                 'description': description,
                 'selected': JSON.stringify(selected)
             }
         }).done(function (response) {
-            if (response === 'OK') {
-                closeDialog('addDialog');
-                clearDialog();
-                refreshContainers();
-            }
-            else {
-                closeDialog('progressDialog');
-                $('#alertDialogErrorText').text(response);
-                openDialog('alertDialog');
-            }
+            closeDialog('addDialog');
+            clearDialog();
+            refreshContainers();
         }).fail(function (xhr, textStatus, errorThrown) {
             closeDialog('progressDialog');
-            $('#alertDialogErrorText').text(textStatus);
+            $('#alertDialogErrorText').text("Could not create pipeline!");
             openDialog('alertDialog');
         });
     }
@@ -349,17 +340,10 @@ function deleteConfirmed() {
             'uri': selectedPipeline.uri
         }
     }).done(function (response) {
-        if (response == 'OK') {
-            refreshContainers();
-        }
-        else {
-            closeDialog('progressDialog');
-            $('#alertDialogErrorText').text(response);
-            openDialog('alertDialog');
-        }
+        refreshContainers();
     }).fail(function (xhr, textStatus, errorThrown) {
         closeDialog('progressDialog');
-        $('#alertDialogErrorText').text(textStatus);
+        $('#alertDialogErrorText').text("Could not delete pipeline!");
         openDialog('alertDialog');
     });
 }
