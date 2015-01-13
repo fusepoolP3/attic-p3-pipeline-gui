@@ -55,12 +55,12 @@
 			  <form class="form-inline">
 			    <table><tr><td style="padding-right: 5px;">
 				  <div class="input-group">
-                    <div class="input-group-btn">
-                      <button id="pipeline-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				  		<span class="glyphicon glyphicon-tasks"></span> Pipeline <span class="caret"></span>
-				  	  </button>
-                      <ul id="pipeline-list" class="dropdown-menu"></ul>
-                    </div>
+                                    <div class="input-group-btn">
+                                      <button id="pipeline-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                                <span class="glyphicon glyphicon-tasks"></span> Pipeline <span class="caret"></span>
+                                                          </button>
+                                      <ul id="pipeline-list" class="dropdown-menu"></ul>
+                                    </div>
 				    <input id="selected-pipeline" type="text" style="width: 300px;" class="form-control" placeholder="Select pipeline...">
 				  </div>
 			    </td><td style="padding-right: 5px;">		
@@ -70,7 +70,9 @@
 				    </span>
 				    <input id="file-path" type="text" class="form-control" placeholder="Select input file..." readonly>
 			      </div><!-- /.input-group -->
-				</td><td>		
+                            </td><td style="padding-right: 5px;">
+                                <input id="content-type" type="text" class="form-control" placeholder="Content-Type...">
+                            </td><td>		
 				  <div style="width: 200px;">
 					<button id="send-btn" class="btn btn-primary" type="button" disabled="true"><span class="glyphicon glyphicon-transfer"></span><span class="glyphicon-button">Send</span></button>
 					<button id="clear-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span><span class="glyphicon-button">Clear</span></button>

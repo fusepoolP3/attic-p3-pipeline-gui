@@ -45,11 +45,16 @@ $('#file').change(function(e){
 
 $('#send-btn').click(function(){
     openDialog('progressDialog');
-
+    var contentType = $('#content-type').val();
+    
+    if(isEmpty(contentType)){
+        contentType = 'text/plain; charset=utf-8';
+    }
+    
     $.ajax({
         type: 'POST',
-        url: selectedPipeline,
-        contentType: 'text/plain; charset=utf-8',
+        url: $('#selected-pipeline').val(),
+        contentType: contentType,
         dataType: 'text',
         data: selectedText
     })
@@ -62,7 +67,8 @@ $('#send-btn').click(function(){
     })
     .fail(function(xhr, textStatus, errorThrown) {
         closeDialog('progressDialog');
-        $('#alertDialogErrorText').text(textStatus);
+        $('#alertDialogErrorText').text("The Pipeline Transformer returned an error!");
+        $('#result-box').html(xhr.responseText);
         openDialog('alertDialog');
     });
 	 
@@ -76,6 +82,7 @@ $('#clear-btn').click(function(){
     $('#selected-pipeline').val('');
     $('#file-path').val('');
     $('#file').val('');
+    $('#content-type').val('');
     $('#result-box').html('');
     $('#send-btn').attr("disabled", true);
     return false;
