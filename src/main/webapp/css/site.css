@@ -3,6 +3,7 @@
 /* -------------------------- */
 body {
     background-color: #eee;
+	position: relative;
 }
 li {
     cursor: pointer;
@@ -15,146 +16,207 @@ li {
 	z-index: 30;
 }
 #container {
-	padding-top: 70px;
+	padding-top: 50px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
 	background-color: #fff;
 	box-shadow: 5px 5px 5px #AAA;
 	-webkit-border-radius: 1px;
 	-moz-border-radius: 1px;
 	border-radius: 4px;
-	position: absolute;
-	top: 0px;
-	bottom: 20px;
-	left: 30px;
-	right: 30px;
-	min-height: 400px;
+	min-height: 500px;
 	min-width: 800px;
 }
 .glyphicon-button {
     margin-left: 5px;
 }
+#loadingCover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 9999999;
+    background: rgba( 0, 0, 0, .6 ) url('../images/loader.gif') 50% 50% no-repeat;
+}
+.hidden {
+	display: none;
+}
+@media (min-width: 1200px) {
+    .list-item-placeholder {
+		width: 553px;
+	}
+	.ui-sortable-helper  {
+		width: 553px;
+	}
+	.ui-draggable-dragging  {
+		width: 553px;
+	}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .disappearing {
+        display: none !important;
+    }
+	.list-item-placeholder {
+		width: 453px;
+	}
+	.ui-sortable-helper  {
+		width: 453px;
+	}
+	.ui-draggable-dragging  {
+		width: 453px;
+	}
+}
+@media (max-width: 992px) {
+	.disappearing {
+        display: none !important;
+    }
+	.list-item-placeholder {
+		width: 368px;
+	}
+	.ui-sortable-helper  {
+		width: 368px;
+	}
+	.ui-draggable-dragging  {
+		width: 368px;
+	}
+}
 /* -------------------------- */
 /* -----	index.html	----- */
 /* -------------------------- */
 #pipeline-panel {
-	width: 250px;
-	position: absolute;
-	top: 70px;
-	bottom: 55px;
-	left: 15px;
 	background-color: #fafafa;
 	margin-bottom: 0px;
 }
 #add-btn {
-	width: 122px;
-	position: absolute;
-	bottom: 15px;
-	left: 15px;
+	margin-top: 6px;
+	width: 100%;
 }
 #delete-btn {
-	width: 122px;
-	position: absolute;
-	bottom: 15px;
-	left: 143px;
+	margin-top: 6px;
+	width: 100%;
 }
 #transformer-panel {
-	position: absolute;	
-	top: 70px;
-	bottom: 15px;
-	right: 15px;
-	left: 275px;
 	background-color: #fafafa;
 	margin-bottom: 0px;
 }
 #pipeline-panel-body {
 	padding: 0;
 	overflow-y: auto;
+	min-height: 414px;
+}
+#pipeline-list a {
+	font-size: 0.90em;
+	/*word-wrap: break-word;*/
+	overflow-x: hidden;
+}
+#transformer-list td {
+	vertical-align: middle;
 }
 #transformer-panel-body {
 	padding: 0;
 	overflow-y: auto;
+	min-height: 454px;
 }
 #transformer-panel-table {
 	background-color: #ffffff;
+	word-break: break-all !important;
 }
 #transformer-panel-table td {
 	font-size: 0.90em;
 }
-/* ---------------------------------- */
-/* -----	index.html (popup)	----- */
-/* ---------------------------------- */
-#addDialog {
-	overflow-x: hidden;
-	overflow-y: hidden;
-	display: none;
+#transformer-panel-table th:first-child {
+	text-align: center;
 }
+#transformer-panel-table td:first-child {
+	text-align: center;
+}
+/* --------------------------- */
+/* ------  create.html  ------ */
+/* --------------------------- */
 #head-panel {
 	padding: 10px;
 	background-color: #fafafa;
-}
-#available-transformers-panel {
-	margin-bottom: 0;
-	width: 475px;
-}
-#transformers-added-panel {
-	margin-bottom: 0;
-	width: 476px;
 }
 #available-transformers-panel-body {
 	padding: 0;
 	background-color: #fafafa;
 	background-image: url('../images/fusepoolCube128.png');
 	background-repeat: no-repeat;
-        background-position: center; 
+    background-position: center; 
 }
 #transformers-added-panel-body {
 	padding: 0;
 	background-color: #fafafa;
 	background-image: url('../images/fusepoolCube128.png');
 	background-repeat: no-repeat;
-        background-position: center; 
+    background-position: center; 
 }
 #draggables {
 	margin: 0;
 	padding: 0;
 	height:400px;
-	width: 474px;
 	overflow-y: auto;
 }
 #sortable {
 	margin: 0;
 	padding: 0;
 	height:400px;
-	width: 474px;
 	overflow-y: auto;
 }
 #draggables  li{
-	width: 100%;
 	cursor: move;
 	background: rgba(255, 255, 255, 0.8);
+	overflow-x: hidden;
 }
 #sortable li  {
 	cursor: move;
 	background: rgba(255, 255, 255, 0.8);
+	overflow-x: hidden;
+}
+.list-item-placeholder {
+	background: rgba(225, 225, 225, 0.8) !important;
+    border: 4px dashed #999;
+	height: 56px;
+}
+.ui-sortable-helper  {
+	z-index: 10000;
+}
+.ui-draggable-dragging  {
+	z-index: 10000;
+}
+/* -------------------------- */
+/* ---  transformers.html --- */
+/* -------------------------- */
+#transformer-table{
+	margin-bottom: 0px;
+	vertical-align: middle;
+	word-break: break-all !important;
+}
+#transformer-table td {
+	font-size: 0.90em;
+	vertical-align: middle;
+}
+#transformer-table th:first-child {
+	text-align: center;
+}
+#transformer-table td:first-child {
+	text-align: center;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+#transformer-table td:last-child {
+	font-size: 1.10em;
+	text-align: center;
 }
 /* -------------------------- */
 /* -----	test.html	----- */
 /* -------------------------- */
-#test-panel {
-	min-height: 300px;
-	position: absolute;
-	top: 70px;
-	bottom: 0px;
-	left: 15px;
-	right: 15px;
-}
 #result-box {
 	margin-bottom: 0;
 	overflow-y: auto;
-	position: absolute;
-	top: 130px;
-	left: 15px;
-	right: 15px;
-	bottom: 15px;
+    min-height: 420px;
 }
 #file-path {
 	cursor: pointer;

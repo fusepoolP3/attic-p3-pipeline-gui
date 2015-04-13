@@ -1,3 +1,38 @@
+function setURIParameters(){
+	var temp = getURLParameter('sparqlEndpoint');
+	if(!isEmpty(temp)){
+		sparqlEndpointURI = temp;
+	}
+
+	temp = getURLParameter('tranformerRegistry');
+	if(!isEmpty(temp)){
+		tranformerRegistryURI = temp;
+	}
+	
+	temp = getURLParameter('pipelineBase');
+	if(!isEmpty(temp)){
+		pipelineBaseURI = temp;
+	}
+}
+
+function getQueryString(){
+	return '?sparqlEndpoint=' + sparqlEndpointURI + '&tranformerRegistry=' + tranformerRegistryURI + '&pipelineBase=' + pipelineBaseURI;
+}
+
+function getURLParameter(paramName){
+	var result = [];
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	
+	for (var i = 0; i < sURLVariables.length; i++){
+		var parameterName = sURLVariables[i].split('=');
+		if (parameterName[0] === paramName){
+			result.push(decodeURIComponent(parameterName[1]));
+		}
+	}
+	return result;
+}
+
 function exist(elementId){
 	if(isEmpty(elementId)){
 		return false;
@@ -26,6 +61,9 @@ function replaceForText(str) {
 }
 
 function replaceForHTML(str) {
+	if(isEmpty(str)){
+		return '';
+	}
     return str.replace(/<.*?>/g, '');
 }
 
@@ -48,7 +86,7 @@ function closeDialog(id) {
     return false;
 }
 
-function createAlertDialog() {
+function createAlertDialog(bodyText) {
     $('<div id="alertDialog" title="Error" style="padding-left: 1px; padding-right: 1px; padding-bottom: 0px;"></div>').appendTo('body')
         .html(
                     '<div class="col-sm-12">'
@@ -56,7 +94,9 @@ function createAlertDialog() {
                             + '<img src="images/exclamation128.png" height="40" width="40" style="margin: 0 auto;">'
                         + '</div>'
                         + '<div class="col-sm-10 text-left" style="padding-left: 20px; padding-right: 0px;">'
-                            + '<p id="alertDialogErrorText">Error...</p>'
+                            + '<p>'
+                                + bodyText
+                            + '</p>'
                         + '</div>'
                     + '</div>'
                     + '<div class="col-sm-12" >'
@@ -68,38 +108,18 @@ function createAlertDialog() {
                             + '</button>'
                     + '</div>'
       ).dialog({
-          modal: true, 
-		  width: 300, 
-		  resizable: false, 
-		  autoOpen: false,
+          modal: true, zIndex: 10000, autoOpen: true,
+		  width: 300, resizable: false, 
           position: { my: "center", at: "center", collision: 'fit' },
-          show: {
+          close: function (event, ui) {
+              $(this).remove();
+          },
+		  show: {
               duration: 300
           },
           hide: {
               duration: 300
           }
-      }).dialog("widget").removeClass('ui-widget');
-}
-
-function createProgressDialog() {
-    $('<div id="progressDialog" title="Progress..." class="dialog"></div>').appendTo('body')
-		.html(
-                '<div style="display: block; text-align: center; width: 100%; padding-top: 15px;">'
-                + '<img src="images/loader70.gif" style="margin: 0 auto;" />'
-                + '</div>'
-
-      ).dialog({
-            modal: true,
-            autoOpen: false,
-			resizable: false,
-            position: { my: "center", at: "center", collision: 'fit' },
-            show: {
-                duration: 300
-            },
-            hide: {
-                duration: 300
-            }
       }).dialog("widget").removeClass('ui-widget');
 }
 
@@ -152,3 +172,28 @@ function createTitle(uri, description){
     title += 'Description: ' + description;
     return title;
 }
+
+/** Showing '#loadingCover' popup panel. */
+function showLoadingCover() {
+    $('#loadingCover').hide().fadeIn(200);
+}
+
+/** Hiding '#loadingCover' popup panel. */
+function hideLoadingCover() {
+    $('#loadingCover').show().fadeOut(400);
+}
+
+$('.navLink').click(function(e){
+	var link = $(this), h;
+    h = link.attr('href');
+    e.preventDefault();
+	if(h == '#'){
+		return false;
+	}
+	else{
+		$('#loadingCover').hide().fadeIn(100);
+		window.setTimeout(function() { 
+			window.location = h + getQueryString();
+		}, 150);
+	}
+});
