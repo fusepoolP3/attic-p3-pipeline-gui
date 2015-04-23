@@ -3,8 +3,7 @@ var selectedPipeline;
 var selectedText;
 
 $(document).ready(function () {
-	setURIParameters();
-    refreshPage();
+	setURIParameters(refreshPage);
 });
 
 function refreshPage(){

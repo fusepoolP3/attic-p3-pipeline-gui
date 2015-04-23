@@ -3,8 +3,7 @@ var selectedPipeline;
 var transformers;
 
 $(document).ready(function () {
-	setURIParameters();
-    refreshPage();
+	setURIParameters(refreshPage);
 });
 
 function refreshPage() {	

@@ -1,22 +1,74 @@
-function setURIParameters(){
-	var temp = getURLParameter('sparqlEndpoint');
-	if(!isEmpty(temp)){
-		sparqlEndpointURI = temp;
-	}
-
-	temp = getURLParameter('tranformerRegistry');
-	if(!isEmpty(temp)){
-		tranformerRegistryURI = temp;
-	}
+function setURIParameters(initFunc){
 	
-	temp = getURLParameter('pipelineBase');
-	if(!isEmpty(temp)){
-		pipelineBaseURI = temp;
+	if(!extractParam("platformURI", "platformURI")) {
+		var platformURI = prompt('Please enter a valid platform URI', 'http://example.com/ldp/platform');
+		if (platformURI != null) {
+			window.platformURI = platformURI;
+		}
+		else {
+			return;
+		}
+	}
+	if(!extractParam("transformerBase", "pipelineBaseURI")) {
+		var pipelineBaseURI = prompt('Please enter a valid pipeline base URI', 'http://example.com:8191/');
+		if (pipelineBaseURI != null) {
+			window.pipelineBaseURI = pipelineBaseURI;
+		}
+		else {
+			return;
+		}
+	}
+	registerConfigData(initFunc);
+}
+
+function extractParam(param, variableName) {
+	var set = getURLParameter(param);
+	if(set.length > 0) {
+		window[variableName] = set[0];
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 
+function registerConfigData(initFunc){
+	
+	var ajaxRequest = $.ajax({	type: "GET",
+								async: false,
+								url: platformURI,
+								cache: false	});
+	
+	ajaxRequest.done(function(response, textStatus, request) {
+		var store = rdfstore.create();
+		store.load('text/turtle', response, function(success, results) {
+			if(success) {
+				
+				var query = "SELECT * { " +
+							" ?s <http://vocab.fusepool.info/platform#sparqlEndpoint> ?sparql . " +
+							" ?s <http://vocab.fusepool.info/platform#transformerRegistry>  ?tr . " +
+							" }";
+				
+				store.execute(query, function(success, results) {
+					if(success) {
+						if(results.length == 0) {
+							alert("Incorrect platform configuration.");
+						}
+						else {
+							sparqlEndpointURI = results[0].sparql.value;
+							tranformerRegistryURI = results[0].tr.value;
+							initFunc();
+						}
+					}
+				});
+			}
+		});
+	});
+	ajaxRequest.fail(function(response, textStatus, statusLabel){});	
+}
+
 function getQueryString(){
-	return '?sparqlEndpoint=' + sparqlEndpointURI + '&tranformerRegistry=' + tranformerRegistryURI + '&pipelineBase=' + pipelineBaseURI;
+	return '?platformURI=' + platformURI + '&transformerBase=' + pipelineBaseURI;
 }
 
 function getURLParameter(paramName){

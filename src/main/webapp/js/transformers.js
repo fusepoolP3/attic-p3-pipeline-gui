@@ -2,8 +2,7 @@ var transformers;
 var selectedTransformer;
 
 $(document).ready(function () {
-	setURIParameters();
-    refreshPage();
+	setURIParameters(refreshPage);
 });
 
 function refreshPage() {
