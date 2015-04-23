@@ -45,8 +45,8 @@ function registerConfigData(initFunc){
 			if(success) {
 				
 				var query = "SELECT * { " +
-							" ?s <http://vocab.fusepool.info/platform#sparqlEndpoint> ?sparql . " +
-							" ?s <http://vocab.fusepool.info/platform#transformerRegistry>  ?tr . " +
+							" ?s <http://vocab.fusepool.info/fp3#sparqlEndpoint> ?sparql . " +
+							" ?s <http://vocab.fusepool.info/fp3#transformerRegistry>  ?tr . " +
 							" }";
 				
 				store.execute(query, function(success, results) {
