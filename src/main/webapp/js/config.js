@@ -1,3 +1,4 @@
-var sparqlEndpointURI = 'http://sandbox.fusepool.info:8181/sparql/select';
-var tranformerRegistryURI = 'http://sandbox.fusepool.info:8181/ldp/tr-ldpc';
-var pipelineBaseURI = 'http://sandbox.fusepool.info:8191/';
+var platformURI;
+var sparqlEndpointURI;
+var tranformerRegistryURI;
+var pipelineBaseURI;

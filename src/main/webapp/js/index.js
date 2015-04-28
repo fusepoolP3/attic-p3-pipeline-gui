@@ -3,11 +3,11 @@ var selectedPipeline;
 var transformers;
 
 $(document).ready(function () {
-	setURIParameters();
-    refreshPage();
+	setURIParameters(refreshPage);
 });
 
-function refreshPage() {	
+function refreshPage() {
+	
 	var query = 'SELECT * WHERE { ' 
 		  + '<' + tranformerRegistryURI + '> <http://www.w3.org/ns/ldp#contains> ?child . '
 			  + '?child <http://purl.org/dc/terms/title> ?title . '
@@ -17,7 +17,7 @@ function refreshPage() {
 			  +	'	?child <http://purl.org/dc/terms/created> ?date . '
 			  + '}'
 		  + '}';
-    
+
 	$.ajax({
         type: 'POST',
         url: sparqlEndpointURI,
