@@ -15,6 +15,6 @@ Compile the source code and start the application with
 
 ###Usage
 
-In a browser go to [http://localhost:8100/](http://localhost:8100/)
+In a browser go to [http://localhost:8201/](http://localhost:8201/)
 
 Specify the query parameters `platformURI` and `transformerBase` to define the URI of the P3 platform as well as the base URI of the Pipeline Transformer.
