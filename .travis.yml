@@ -1,1 +1,11 @@
 language: java
+before_install: mvn install -DskipTests=true -DfinalName=pipeline-gui-$TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key:
+    secure: HEp+HmCiDkswlCc/DGoaUTvJHxwHpWVqi5kKW24ygberLD0rkFK8TJtX3PHEc7gAjezqrOqoVy4v0K4JprT7SlDUFOUGR7l2xNNkoGrRAR1d+Nwyne5Nm9VLEnfr0sSlrZsg4vhF+Cl13R4CmiYP6FKXDL9m1XOBCyWf77h1CTM=
+  file: target/pipeline-gui-$TRAVIS_TAG-jar-with-dependencies.jar
+  on:
+    repo: fusepoolP3/p3-pipeline-gui
+    tags: true
+    all_branches: true
