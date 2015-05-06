@@ -56,7 +56,7 @@ function registerConfigData(initFunc){
 						}
 						else {
 							sparqlEndpointURI = results[0].sparql.value;
-							tranformerRegistryURI = results[0].tr.value;
+							transformerRegistryURI = results[0].tr.value;
 							initFunc();
 						}
 					}

@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function refreshPage() {
 	var query = 'SELECT * WHERE { ' 
-			  + '<' + tranformerRegistryURI + '> <http://www.w3.org/ns/ldp#contains> ?child . '
+			  + '<' + transformerRegistryURI + '> <http://www.w3.org/ns/ldp#contains> ?child . '
 				  + '?child <http://purl.org/dc/terms/title> ?title . '
 				  + '?child <http://vocab.fusepool.info/trldpc#transformer> ?uri . '
 				  + 'OPTIONAL { '
@@ -112,7 +112,7 @@ $('#save-btn').click(function () {
 			headers: { 
 				'Content-Type': 'text/turtle'
 			},
-			url: tranformerRegistryURI,
+			url: transformerRegistryURI,
 			data: data
 		}).done(function (response) {
 			clearDialog();

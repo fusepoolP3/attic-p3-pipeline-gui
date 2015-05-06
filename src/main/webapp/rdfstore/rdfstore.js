@@ -28238,7 +28238,7 @@ QueryEngine.QueryEngine.prototype.groupSolution = function(bindings, group, data
             var mustAddBindings = true;
 
             /**
-             * In this loop, we iterate through all the group clauses and tranform the current bindings
+             * In this loop, we iterate through all the group clauses and transform the current bindings
              * according to the group by clauses.
              * If it is the first iteration we also save in a different array the order for the 
              * grouped variables that will be used later to build the final groups

@@ -1,4 +1,4 @@
 var platformURI;
 var sparqlEndpointURI;
-var tranformerRegistryURI;
+var transformerRegistryURI;
 var pipelineBaseURI;
