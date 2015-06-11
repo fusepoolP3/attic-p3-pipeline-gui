@@ -1,5 +1,7 @@
 function setURIParameters(initFunc){
-	
+	//platformURI = 'http://sandbox.fusepool.info:8181/ldp/platform/';
+    //pipelineBaseURI = 'http://sandbox.fusepool.info:8300/';
+
 	if(!extractParam("platformURI", "platformURI")) {
 		var platformURI = prompt('Please enter a valid platform URI', 'http://example.com/ldp/platform');
 		if (platformURI != null) {
@@ -34,10 +36,11 @@ function extractParam(param, variableName) {
 
 function registerConfigData(initFunc){
 	
-	var ajaxRequest = $.ajax({	type: "GET",
-								async: false,
-								url: platformURI,
-								cache: false	});
+	var ajaxRequest = $.ajax({	
+                type: "GET",
+                async: false,
+		url: platformURI,
+		cache: false	});
 	
 	ajaxRequest.done(function(response, textStatus, request) {
 		var store = rdfstore.create();
