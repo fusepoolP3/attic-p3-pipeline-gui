@@ -118,13 +118,17 @@ function refreshTable(uri) {
 				jQuery.each(selectedPipelineTranformers, function (j, child) {
 					// get transformer by URI from the list of transformers
 					var temp = getTransformerByURI(child.item.value);
+					// if not found by URI try to find as pipeline
+					if(temp == null){
+						temp = getPipelineByURI(child.item.value);
+					}
 					if (temp == null) {
 						// add transformer as unknown if not found
 						transformerListContent += '<tr><td>' + (j + 1) + '</td><td><i><font>Unknown transformer</font></i></td><td>' + replaceForHTML(child.item.value) + '</td></tr>';
 					}
 					else {
 						// add transformer
-						transformerListContent += '<tr title="' + replaceForHTML(temp.description.value) + '"><td>' + (j + 1) + '</td><td>' + replaceForHTML(temp.title.value) + '</td><td>' + replaceForHTML(temp.uri.value) + '</td></tr>';
+						transformerListContent += '<tr title="' + replaceForHTML(temp.description.value) + '"><td>' + (j + 1) + '</td><td>' + replaceForHTML(temp.title.value) + '</td><td>' + replaceForHTML(child.item.value) + '</td></tr>';
 					}
 				});
 			}
@@ -163,6 +167,18 @@ function getTransformerByURI(str) {
         if (transformers[i].uri.value === str) {
             return transformers[i];
         }
+    }
+    return null;
+}
+
+function getPipelineByURI(str) {
+    for (var i = 0; i < pipelines.length; i++) {
+        var temp = str.split('?config=');
+		if(temp.length > 1) {
+			if (pipelines[i].child.value === temp[1]) {
+				return pipelines[i];
+			}
+		}
     }
     return null;
 }

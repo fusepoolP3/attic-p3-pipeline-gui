@@ -8,13 +8,15 @@ $(document).ready(function () {
 
 function refreshPage() {
     var query = 'PREFIX dc: <http://purl.org/dc/terms/> '
-            + 'PREFIX trldpc: <http://vocab.fusepool.info/trldpc#> '
+            + 'PREFIX pt: <http://vocab.fusepool.info/pipeline-transformer#> '
+			+ 'PREFIX trldpc: <http://vocab.fusepool.info/trldpc#> '
             + 'PREFIX ldp: <http://www.w3.org/ns/ldp#> '
             + 'SELECT * WHERE { '
             + ' <' + transformerRegistryURI + '> ldp:contains ?child . '
             + ' ?child dc:title ?title . '
             + ' ?child trldpc:transformer ?uri . '
             + '     OPTIONAL { '
+			+ ' 		?child pt:transformers ?list . '
             + '         ?child dc:description ?description . '
             + '         ?child dc:created ?date . '
             + '     }'
@@ -35,16 +37,17 @@ function refreshPage() {
 
         jQuery.each(transformers, function (i, transformer) {
             var uri = isEmpty(transformer.list) ? transformer.uri.value : transformer.uri.value + '?config=' + transformer.child.value;
-            if (uri.length > 100) {
-                uri = uri.substring(0, 99) + '...';
+            var description = uri;
+			if (description.length > 100) {
+                description = description.substring(0, 99) + '...';
             }
 
             initListContent += '<li title="' + transformer.uri.value + '" class="list-group-item">' +
                     '<table style="width:100%;"><tr><td style="width: 95%;">' +
                     '<p class="index" style="display:none;">' + i + '</p>' +
                     '<b class="list-group-item-heading">' + transformer.title.value + '</b>' +
-                    '<p class="list-group-item-text" style="font-size: .80em;">' + uri + '</p>' +
-                    '<span class="uri hidden">' + transformer.uri.value + '</span>' +
+                    '<p class="list-group-item-text" style="font-size: .80em;">' + description + '</p>' +
+                    '<span class="uri hidden">' + uri + '</span>' +
                     '</td><td style="width: 15%; text-align: right;">' +
                     '<a class="remove-icon" style="visibility: hidden;" href="#" onclick="removeMe(this);"><span class="glyphicon glyphicon-remove"></span></a></td></tr></table>' +
                     '</li>';
