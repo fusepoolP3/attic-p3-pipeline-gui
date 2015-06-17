@@ -80,6 +80,13 @@ function refreshTable(uri) {
     var pipelineListContent = '';
     var transformerListContent = '';
 
+	if(isEmpty(pipelines)){
+		$('#pipeline-list').html('<div style="height:35px;margin:15px;"><i>No avaliable pipeline...</i></div>');
+		$('#transformer-list').html('<tr><td colspan="3"><i>No transformer available...</i></td></tr>');
+		hideLoadingCover();
+		return;
+	}
+
 	// if no URI was supplied select first
 	if(isEmpty(uri)){
 		uri = pipelines[0].child.value;
