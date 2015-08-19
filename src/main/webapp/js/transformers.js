@@ -119,7 +119,8 @@ function registerTranformer(){
 	
 	var data = '@prefix dcterms: <http://purl.org/dc/terms/> . '
         + '@prefix trldpc: <http://vocab.fusepool.info/trldpc#> . '
-        + '<> a trldpc:TransformerRegistration; '
+		+ '@prefix ldp: <http://www.w3.org/ns/ldp#> .'
+        + '<> a ldp:Container, ldp:BasicContainer, trldpc:TransformerRegistration; '
         + 'trldpc:transformer <' + uri + '>; '
         + 'dcterms:title "' + name + '"@en; '
         + 'dcterms:description "' + description + '". ';
@@ -127,7 +128,8 @@ function registerTranformer(){
     $.ajax({
         type: 'POST',
         headers: {
-            'Content-Type': 'text/turtle'
+            'Content-Type': 'text/turtle',
+			'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel=?type?'
         },
         url: transformerRegistryURI,
         data: data
