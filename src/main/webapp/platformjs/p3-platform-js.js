@@ -60,15 +60,17 @@ P3Platform.prototype.getPlatform = function (platformURI) {
 
 				var data = '@prefix dcterms: <http://purl.org/dc/terms/> . '
 								+ '@prefix trldpc: <http://vocab.fusepool.info/trldpc#> . '
-								+ '@prefix ldp: <http://www.w3.org/ns/ldp#> . '
-								+ '<> a ldp:Container, ldp:BasicContainer, trldpc:TransformerRegistration; '
+								+ '<> a trldpc:TransformerRegistration; '
 								+ 'trldpc:transformer <' + transformerURI + '>; '
 								+ descriptionProp
 								+ 'dcterms:title "' + title + '"@en . ';
 
 				$.ajax({
 						type: 'POST',
-						headers: { 'Content-Type': 'text/turtle' },
+						headers: {
+							'Content-Type': 'text/turtle',
+							'Slug': title
+						},
 						url: main.URI,
 						data: data,
 						async: true
@@ -102,15 +104,17 @@ P3Platform.prototype.getPlatform = function (platformURI) {
 
 				var data = '@prefix dcterms: <http://purl.org/dc/terms/> . '
 								+ '@prefix tfrldpc: <http://vocab.fusepool.info/tfrldpc#> . '
-								+ '@prefix ldp: <http://www.w3.org/ns/ldp#> . '
-								+ '<> a ldp:Container, ldp:BasicContainer, tfrldpc:TransformerFactoryRegistration; '
+								+ '<> a tfrldpc:TransformerFactoryRegistration; '
 								+ 'tfrldpc:transformerFactory <' + transformerFactoryURI + '>; '
 								+ descriptionProp
 								+ 'dcterms:title "' + title + '"@en . ';
 
 				$.ajax({
 						type: 'POST',
-						headers: { 'Content-Type': 'text/turtle' },
+						headers: {
+							'Content-Type': 'text/turtle',
+							'Slug': title
+						},
 						url: main.URI,
 						data: data,
 						async: true
