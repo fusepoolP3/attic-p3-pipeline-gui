@@ -147,14 +147,8 @@ function checkIfValid() {
 
 function selectPipeline(index) {
     selectedPipeline = pipelines[index];
-    if (isEmpty(selectedPipeline.list)) {
-        $('#selected-pipeline').val(selectedPipeline.uri.value);
-        $('#selected-pipeline').prop('title', selectedPipeline.uri.value);
-    }
-    else {
-        $('#selected-pipeline').val(selectedPipeline.uri.value + '?config=' + selectedPipeline.child.value);
-        $('#selected-pipeline').prop('title', selectedPipeline.uri.value + '?config=' + selectedPipeline.child.value);
-    }
+    $('#selected-pipeline').val(selectedPipeline.uri.value);
+    $('#selected-pipeline').prop('title', selectedPipeline.uri.value);
     checkIfValid();
     return false;
 }

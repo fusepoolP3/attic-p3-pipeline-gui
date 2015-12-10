@@ -110,13 +110,6 @@ $('#save-btn').click(function () {
 	var name = $('#pipeline-name').val();
     var description = $('#pipeline-description').val();
 
-	var count = 0;
-    var uris = '';
-    $('#sortable').find('.uri').each(function () {
-        uris += '<' + $(this).text() + '> ';
-		count++;
-    });
-
     var data = '@prefix dcterms: <http://purl.org/dc/terms/> . '
             + '@prefix trldpc: <http://vocab.fusepool.info/trldpc#> . '
             + '@prefix pt: <http://vocab.fusepool.info/pipeline-transformer#> .'
@@ -124,9 +117,7 @@ $('#save-btn').click(function () {
             + '<> a ldp:Container, ldp:BasicContainer, trldpc:TransformerRegistration; '
             + 'trldpc:transformer <' + pipelineBaseURI + '>; '
             + 'dcterms:title "' + name + '"@en; '
-            + 'dcterms:description "' + description + '" ; '
-			+ 'pt:length "' + count + '" ; '
-            + 'pt:transformers (' + uris + ') .';
+            + 'dcterms:description "' + description + '" . '
 
     $.ajax({
         type: 'POST',
@@ -136,12 +127,54 @@ $('#save-btn').click(function () {
         },
         url: transformerRegistryURI,
         data: data
-    }).done(function (response) {
-        clearDialog();
-        $('#loadingCover').hide().fadeIn(100);
-        window.setTimeout(function () {
-            window.location = 'index.html' + getQueryString();
-        }, 150);
+    }).done(function (response, success, request) {
+		var count = 0;
+		var uris = '';
+		$('#sortable').find('.uri').each(function () {
+			uris += '<' + $(this).text() + '> ';
+			count++;
+		});
+		
+		var actualContainer = request.getResponseHeader('Location');
+		var ETag = request.getResponseHeader('ETag');
+		console.log(ETag);
+		
+		if(pipelineBaseURI.slice(-1) != '/'){
+			pipelineBaseURI += '/';
+		}
+		
+		data = '@prefix dcterms: <http://purl.org/dc/terms/> . '
+				+ '@prefix trldpc: <http://vocab.fusepool.info/trldpc#> . '
+				+ '@prefix pt: <http://vocab.fusepool.info/pipeline-transformer#> .'
+				+ '@prefix ldp: <http://www.w3.org/ns/ldp#> .'
+				+ '<> a ldp:Container, ldp:BasicContainer, trldpc:TransformerRegistration; '
+				+ 'trldpc:transformer <' + pipelineBaseURI + '?config=' + encodeURIComponent(actualContainer) + '>; '
+				+ 'dcterms:title "' + name + '"@en; '
+				+ 'dcterms:description "' + description + '" ; '
+				+ 'pt:length "' + count + '" ; '
+				+ 'pt:transformers (' + uris + ') .';
+
+		$.ajax({
+			type: 'PUT',
+			headers: {
+				'Content-Type': 'text/turtle',
+				'Link': '<http://www.w3.org/ns/ldp#BasicContainer>; rel=?type?',
+				'If-Match': ETag
+			},
+			url: actualContainer,
+			data: data
+		}).done(function (response) {
+			clearDialog();
+			$('#loadingCover').hide().fadeIn(100);
+			window.setTimeout(function () {
+				window.location = 'index.html' + getQueryString();
+			}, 150);
+		}).fail(function (xhr, textStatus, errorThrown) {
+			hideLoadingCover();
+			window.setTimeout(function () {
+				createAlertDialog(textStatus);
+			}, 400);
+		});
     }).fail(function (xhr, textStatus, errorThrown) {
         hideLoadingCover();
         window.setTimeout(function () {
